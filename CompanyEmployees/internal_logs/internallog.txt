@@ -1,0 +1,39 @@
+2025-11-06 20:29:26.7372 Debug Message Template Auto Format enabled
+2025-11-06 20:29:26.7481 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Unrecognized element 'target' from section 'NLog'
+2025-11-06 20:29:26.7533 Trace ParseRulesElement
+2025-11-06 20:29:26.7533 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'logfile' not found for logging rule: *.
+2025-11-06 20:29:26.7533 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.5.4631. Product version: 6.0.5+a023270f66a9445456a70c06668acabe7179c723. GlobalAssemblyCache: False
+2025-11-06 20:29:26.7533 Debug AutoReload Config File Monitor refreshing after configuration changed
+2025-11-06 20:29:26.7533 Debug AutoReload Config File Monitor starting
+2025-11-06 20:29:26.7533 Debug Start watching file-filter 'nlog.config' in directory: D:\projects\CompanyEmployees\CompanyEmployees\CompanyEmployees
+2025-11-06 20:29:26.7533 Debug --- NLog configuration dump ---
+2025-11-06 20:29:26.7533 Debug Targets:
+2025-11-06 20:29:26.7533 Debug Rules:
+2025-11-06 20:29:26.7533 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ ]
+2025-11-06 20:29:26.7533 Debug --- End of NLog configuration dump ---
+2025-11-06 20:29:26.7739 Trace FindReachableObject<System.Object>:
+2025-11-06 20:29:26.7866 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ ]'
+2025-11-06 20:29:26.7866 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic.IList`1[NLog.Targets.Target]
+2025-11-06 20:29:26.7866 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic.IList`1[NLog.Config.LoggingRule]
+2025-11-06 20:29:26.7866 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic.IList`1[NLog.Filters.Filter]
+2025-11-06 20:29:26.7866 Info Configuration initialized: Targets=0, ConfigItems=1, AutoReload=true, FilePath=D:\projects\CompanyEmployees\CompanyEmployees\CompanyEmployees\nlog.config
+2025-11-06 20:31:56.0561 Debug Message Template Auto Format enabled
+2025-11-06 20:31:56.0673 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Unrecognized element 'target' from section 'NLog'
+2025-11-06 20:31:56.0673 Trace ParseRulesElement
+2025-11-06 20:31:56.0673 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'logfile' not found for logging rule: *.
+2025-11-06 20:31:56.0673 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.5.4631. Product version: 6.0.5+a023270f66a9445456a70c06668acabe7179c723. GlobalAssemblyCache: False
+2025-11-06 20:31:56.0821 Debug AutoReload Config File Monitor refreshing after configuration changed
+2025-11-06 20:31:56.0821 Debug AutoReload Config File Monitor starting
+2025-11-06 20:31:56.0821 Debug Start watching file-filter 'nlog.config' in directory: D:\projects\CompanyEmployees\CompanyEmployees\CompanyEmployees
+2025-11-06 20:31:56.0821 Debug --- NLog configuration dump ---
+2025-11-06 20:31:56.0821 Debug Targets:
+2025-11-06 20:31:56.0821 Debug Rules:
+2025-11-06 20:31:56.0821 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ ]
+2025-11-06 20:31:56.0821 Debug --- End of NLog configuration dump ---
+2025-11-06 20:31:56.0821 Trace FindReachableObject<System.Object>:
+2025-11-06 20:31:56.1459 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ ]'
+2025-11-06 20:31:56.1459 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic.IList`1[NLog.Targets.Target]
+2025-11-06 20:31:56.1459 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic.IList`1[NLog.Config.LoggingRule]
+2025-11-06 20:31:56.1459 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic.IList`1[NLog.Filters.Filter]
+2025-11-06 20:31:56.1459 Info Configuration initialized: Targets=0, ConfigItems=1, AutoReload=true, FilePath=D:\projects\CompanyEmployees\CompanyEmployees\CompanyEmployees\nlog.config
+2025-11-06 20:32:07.8844 Debug Targets not configured for Logger: LoggerService.LoggerManager
