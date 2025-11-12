@@ -11,7 +11,11 @@ namespace Repository
         }
 
         public void CreateCompany(Company company) => Create(company);
-        
+
+        public IEnumerable<Company> GetById(IEnumerable<Guid> ids, bool trackChanges) =>
+            FindByCondition(x=>ids.Contains(x.Id), trackChanges)
+                .ToList();
+
         public IEnumerable<Company> GetCompanies(bool trackChanges) =>
             FindAll(trackChanges)
                 .OrderBy(c => c.Name)
