@@ -1,0 +1,43 @@
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel;
+using System.Reflection;
+
+namespace CompanyEmployees.Presentation.ModelBinders
+{
+    public class ArrayModeBinder : IModelBinder
+    {
+        public Task BindModelAsync(ModelBindingContext bindingContext)
+        {
+            if (!bindingContext.ModelMetadata.IsEnumerableType)
+            {
+                bindingContext.Result = ModelBindingResult.Failed();
+
+                return Task.CompletedTask;
+            }
+
+            var providedValues = bindingContext.ValueProvider
+                .GetValue(bindingContext.ModelName)
+                .ToString();
+
+            if (string.IsNullOrEmpty(providedValues))
+            {
+                bindingContext.Result = ModelBindingResult.Success(null);
+                return Task.CompletedTask;
+            }
+
+            var genericType = bindingContext.ModelType.GetTypeInfo().GenericTypeArguments[0];
+            var converter = TypeDescriptor.GetConverter(genericType);
+
+            var objectArray = providedValues.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => converter.ConvertFromString(x.Trim()))
+                .ToArray();
+
+            var guidArray = Array.CreateInstance(genericType, objectArray.Length);
+            objectArray.CopyTo(guidArray, 0);
+            bindingContext.Model = guidArray;
+
+            bindingContext.Result = ModelBindingResult.Success(bindingContext.Model);
+            return Task.CompletedTask;
+        }
+    }
+}
