@@ -1,10 +1,10 @@
 using CompanyEmployees.Extensions;
+using CompanyEmployees.Presentation.ActionFilters;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using NLog;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using CompanyEmployees.ActionFilters;
 
 var builder = WebApplication.CreateBuilder(args);
 

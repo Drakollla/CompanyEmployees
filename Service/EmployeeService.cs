@@ -4,7 +4,7 @@ using Entities.Exceptions;
 using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects;
-using System.Threading.Tasks;
+using Shared.RequestFeatures;
 
 namespace Service
 {
@@ -70,14 +70,14 @@ namespace Service
             return (employeeToPatch, employeeDb);
         }
 
-        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(Guid companyId, bool trackChanges)
+        public async Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges)
         {
             await CheckIfCompanyExists(companyId, trackChanges);
 
-            var employees = _repository.Employee.GetEmployeesAsync(companyId, trackChanges);
-            var employesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
+            var employeesWitnMetaData = await _repository.Employee.GetEmployeesAsync(companyId, employeeParameters, trackChanges);
+            var employesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesWitnMetaData);
 
-            return employesDto;
+            return (employees: employesDto, metaData: employeesWitnMetaData.MetaData);
         }
 
         public async Task SaveChangesForPatchAsync(EmployeeForUpdateDto employeeToPatch, Employee employeeEntity)
@@ -108,7 +108,7 @@ namespace Service
         {
             var employeeDb = await _repository.Employee.GetEmployeeAsync(companyId, id, trackChanges);
 
-            if(employeeDb is null)
+            if (employeeDb is null)
                 throw new EmployeeNotFoundException(id);
 
             return employeeDb;
