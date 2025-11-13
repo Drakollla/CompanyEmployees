@@ -17,6 +17,7 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 
 builder.Services.AddControllers()
+    .AddNewtonsoftJson()
     .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssenblyReference).Assembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -41,7 +42,7 @@ var app = builder.Build();
 var logger = app.Services.GetRequiredService<ILoggerManager>();
 app.ConfigureExceptionHandler(logger);
 
-if(app.Environment.IsProduction())
+if (app.Environment.IsProduction())
     app.UseHsts();
 
 if (app.Environment.IsDevelopment())
