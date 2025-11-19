@@ -29,8 +29,8 @@ builder.Services.AddControllers(config => {
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true;
 })
-    .AddXmlDataContractSerializerFormatters()
-    .AddCustomCSVFormatter()
+    //.AddXmlDataContractSerializerFormatters()
+    //.AddCustomCSVFormatter()
     .AddNewtonsoftJson()
     .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssenblyReference).Assembly);
 

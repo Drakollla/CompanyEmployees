@@ -29,13 +29,16 @@ namespace CompanyEmployees.Utility
             return ReturnShapedEmployees(shapedEmployees);
         }
 
-        // Исправили название Date -> Data и убрали .Select(e => e.Entity)
         private List<ExpandoObject> ShapeData(IEnumerable<EmployeeDto> employeeDto, string fields) =>
             _dataShaper.ShapeData(employeeDto, fields).ToList();
 
         private bool ShouldGenerateLinks(HttpContext httpContext)
         {
             var mediaType = (MediaTypeHeaderValue)httpContext.Items["AcceptHeaderMediaType"];
+
+            if (mediaType == null)
+                return false;
+
             return mediaType.SubTypeWithoutSuffix.EndsWith("hateoas", StringComparison.InvariantCultureIgnoreCase);
         }
 
@@ -50,12 +53,10 @@ namespace CompanyEmployees.Utility
             {
                 var employeeLinks = CreateLinksForEmployee(httpContext, companyId, employeeDtoList[index].Id, fields);
 
-                // ExpandoObject можно привести к словарю для добавления ссылок
                 var employeeDictionary = shapedEmployees[index] as IDictionary<string, object>;
                 employeeDictionary.Add("Links", employeeLinks);
             }
 
-            // Здесь LinksCollectionWrapper должен уметь принимать ExpandoObject вместо Entity
             var employeeCollection = new LinksCollectionWrapper<ExpandoObject>(shapedEmployees);
             var linkedEmployees = CreateLinksForEmployees(httpContext, employeeCollection);
 
