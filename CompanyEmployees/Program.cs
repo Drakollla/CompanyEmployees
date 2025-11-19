@@ -1,5 +1,6 @@
 using CompanyEmployees.Extensions;
 using CompanyEmployees.Presentation.ActionFilters;
+using CompanyEmployees.Utility;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -21,6 +22,8 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<ValidationFilterAttribute>();
+builder.Services.AddScoped<ValidateMediaTypeAttribute>();
+builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 
 builder.Services.AddControllers(config => { 
     config.RespectBrowserAcceptHeader = true;
@@ -30,6 +33,9 @@ builder.Services.AddControllers(config => {
     .AddCustomCSVFormatter()
     .AddNewtonsoftJson()
     .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssenblyReference).Assembly);
+
+builder.Services.AddCustomMediaTypes();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

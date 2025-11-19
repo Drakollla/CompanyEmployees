@@ -8,7 +8,7 @@ namespace Service
     {
         public PropertyInfo[] Properties { get; set; }
 
-        public DataShaper() 
+        public DataShaper()
         {
             Properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
         }
@@ -16,8 +16,13 @@ namespace Service
         public IEnumerable<ExpandoObject> ShapeData(IEnumerable<T> entities, string fieldString)
         {
             var requiredProperties = GetRequiredProperties(fieldString);
-
             return FetchData(entities, requiredProperties);
+        }
+
+        public ExpandoObject ShapeData(T entity, string fieldString)
+        {
+            var requiredProperties = GetRequiredProperties(fieldString);
+            return FetchDataForEntity(entity, requiredProperties);
         }
 
         private IEnumerable<PropertyInfo> GetRequiredProperties(string fieldsString)
@@ -31,14 +36,16 @@ namespace Service
                 foreach (var field in fields)
                 {
                     var property = Properties.FirstOrDefault(pi => pi.Name.Equals(field.Trim(), StringComparison.InvariantCultureIgnoreCase));
-
                     if (property == null)
                         continue;
 
                     requiredProperties.Add(property);
                 }
             }
-            else requiredProperties = Properties.ToList();
+            else
+            {
+                requiredProperties = Properties.ToList();
+            }
 
             return requiredProperties;
         }
@@ -53,27 +60,20 @@ namespace Service
                 shapedData.Add(shapedObject);
             }
 
-            return shapedData; 
+            return shapedData;
         }
 
         private ExpandoObject FetchDataForEntity(T entity, IEnumerable<PropertyInfo> requiredProperties)
         {
             var shapedObject = new ExpandoObject();
 
-            foreach(var property in requiredProperties)
+            foreach (var property in requiredProperties)
             {
                 var objectPropertyValue = property.GetValue(entity);
                 shapedObject.TryAdd(property.Name, objectPropertyValue);
-            }    
+            }
 
             return shapedObject;
-        }
-
-        public ExpandoObject ShapeData(T entity, string fieldString)
-        {
-            var requiredProperties = GetRequiredProperties(fieldString);
-
-            return FetchDataForEntity(entity, requiredProperties);
         }
     }
 }
