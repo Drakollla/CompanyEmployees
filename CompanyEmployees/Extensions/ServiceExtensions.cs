@@ -85,5 +85,19 @@ namespace CompanyEmployees.Extensions
             });
         }
 
+        public static void ConfigureResponseCaching(this IServiceCollection services) =>
+            services.AddResponseCaching();
+
+        public static void ConfigureHttpCacheHeaders(this IServiceCollection services) =>
+            services.AddHttpCacheHeaders((experationOpt) =>
+            {
+                experationOpt.MaxAge = 65;
+                experationOpt.CacheLocation = Marvin.Cache.Headers.CacheLocation.Private;
+            },
+            (validationOpt) =>
+            {
+                validationOpt.MustRevalidate = true;
+            });
+
     }
 }
