@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace CompanyEmployees.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20251121101519_AddedRolesToDb")]
+    partial class AddedRolesToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,13 +224,13 @@ namespace CompanyEmployees.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c2d29786-3c88-430d-8575-e6f5f6037952",
+                            Id = "013c0a38-09d5-40f3-981c-ab061782c88e",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "f620031e-f23d-466c-97f4-953674c63128",
+                            Id = "f24c1e1b-22f4-48d9-9b06-d69e00787edd",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

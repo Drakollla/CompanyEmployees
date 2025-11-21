@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace CompanyEmployees.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20251121100827_CreatingIdentityTables")]
+    partial class CreatingIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,20 +220,6 @@ namespace CompanyEmployees.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c2d29786-3c88-430d-8575-e6f5f6037952",
-                            Name = "Manager",
-                            NormalizedName = "MANAGER"
-                        },
-                        new
-                        {
-                            Id = "f620031e-f23d-466c-97f4-953674c63128",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
