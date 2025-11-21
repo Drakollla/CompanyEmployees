@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AspNetCoreRateLimit;
+using Contracts;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -52,7 +53,7 @@ namespace CompanyEmployees.Extensions
                     .OfType<SystemTextJsonOutputFormatter>()?
                     .FirstOrDefault();
 
-                if(systenTextJsonOutputFormatter != null)
+                if (systenTextJsonOutputFormatter != null)
                 {
                     systenTextJsonOutputFormatter.SupportedMediaTypes
                         .Add("application/vnd.codemase.hateoas+json");
@@ -98,6 +99,28 @@ namespace CompanyEmployees.Extensions
             {
                 validationOpt.MustRevalidate = true;
             });
+
+        public static void ConfigureRateLimitingOptions(this IServiceCollection services)
+        {
+            var rateLimitsRules = new List<RateLimitRule>
+            {
+                new RateLimitRule
+                {
+                    Endpoint = "*",
+                    Limit = 3,
+                    Period = "5m"
+                }
+            };
+
+            services.Configure<IpRateLimitOptions>(opt =>
+            {
+                opt.GeneralRules = rateLimitsRules;
+            });
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+        }
 
     }
 }
