@@ -33,5 +33,14 @@ namespace CompanyEmployees.Presentation.Controllers
             return StatusCode(201);
         }
 
+        [HttpPost("login")]
+        [ServiceFilter(typeof(ValidationAttribute))]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+        {
+            if(!await _service.AuthenticationServise.ValidateUser(user))
+                return Unauthorized();
+
+            return Ok(new { Token = await _service.AuthenticationServise.CreateToken() });
+        }
     }
 }
