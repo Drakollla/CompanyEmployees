@@ -40,7 +40,10 @@ namespace CompanyEmployees.Presentation.Controllers
             if(!await _service.AuthenticationServise.ValidateUser(user))
                 return Unauthorized();
 
-            return Ok(new { Token = await _service.AuthenticationServise.CreateToken() });
+            var tokenDto = await _service.AuthenticationServise.CreateToken(populateExp: true);
+
+            return Ok(tokenDto);
         }
+
     }
 }
