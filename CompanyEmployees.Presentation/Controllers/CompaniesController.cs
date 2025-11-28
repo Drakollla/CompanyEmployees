@@ -12,12 +12,17 @@ namespace CompanyEmployees.Presentation.Controllers
     [Route("api/companies")]
     [ResponseCache(CacheProfileName = "120SecondsDuration")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "v1")]
     public class CompaniesController : ControllerBase
     {
         private readonly IServiceManager _service;
 
         public CompaniesController(IServiceManager service) => _service = service;
-
+        
+        /// <summary>
+        /// Gets the list of all companies
+        /// </summary>
+        /// <returns> The companies list</returns>
         [HttpGet(Name = "GetCompanies")]
         [Authorize]
         public async Task<IActionResult> GetCompanies()

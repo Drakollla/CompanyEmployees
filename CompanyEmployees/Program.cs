@@ -30,6 +30,7 @@ builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWt(builder.Configuration);
 builder.Services.AddJwtConfiguration(builder.Configuration);
+builder.Services.ConfigureSwagger();
 
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<ValidationFilterAttribute>();
@@ -78,7 +79,11 @@ if (app.Environment.IsProduction())
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(s =>
+    {
+        s.SwaggerEndpoint("/swagger/v1/swagger.json", "Company Employee API v1");
+        s.SwaggerEndpoint("/swagger/v2/swagger.json", "Company Employee API v2");
+    });
 }
 
 app.UseHttpsRedirection();
