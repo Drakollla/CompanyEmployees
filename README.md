@@ -81,4 +81,5 @@ The application automatically creates the required Qdrant collection on startup.
 ## 🔗 Resources & Acknowledgments
 
 - **[Qdrant](https://qdrant.tech/)** - The Vector Database for the next generation of AI.
-- **[Hugging Face]([https://huggingface.co/](https://huggingface.co/Xenova/clip-vit-base-patch32/tree/main/onnx)])** - The platform where the CLIP model was sourced.
+- **[Hugging Face]** - The platform where the CLIP model was sourced.
+(https://huggingface.co/](https://huggingface.co/Xenova/clip-vit-base-patch32/tree/main/onnx)
